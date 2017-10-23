@@ -56,26 +56,31 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     //JSON Parsing
     /***************************************************************/
     func updateWeatherData(json: JSON) {
-            let city : String = String(describing: json["name"])
-            let tempResult = json["main"]["temp"].double
-            let weatherConditions = json["weather"]["main"]
-            let weatherDescription = json["weather"]["description"]
-            let weatherIcon = json["weather"]["icon"]
+        if let tempResult = json["main"]["temp"].double {
+        let weatherConditions = json["weather"][0]["id"]
+        let weatherDescription = json["weather"][0]["description"]
         
-        weatherDataModel.temperature = Int(tempResult! - 273.15)
-        weatherDataModel.city = city
-        weatherDataModel.conditions = String(weatherConditions)
-        weatherConditions
-        
+        weatherDataModel.temperature = Int(tempResult - 273.15)
+        weatherDataModel.city = json["name"].stringValue
+        weatherDataModel.conditions = weatherConditions.intValue
+        weatherDataModel.description = weatherDescription.stringValue
+        weatherDataModel.weaterIconName = weatherDataModel.updateWeatherIcon(condition: weatherDataModel.conditions)
+            
+        updateUIWithWeatherData()
+            
+        }
+        else {
+            cityLabel.text = "Weahter Unavalible"
+        }
     }
     
     //MARK: - UI Updates
     /***************************************************************/
-    
-    
-    //Write the updateUIWithWeatherData method here:
-    
-    
+    func updateUIWithWeatherData() {
+        cityLabel.text = weatherDataModel.city
+        temperatureLabel.text = String(weatherDataModel.temperature)
+        weatherIcon.image = UIImage(named: weatherDataModel.weaterIconName)
+    }
     
     
     
