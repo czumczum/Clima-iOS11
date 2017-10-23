@@ -10,8 +10,12 @@ import UIKit
 
 class WeatherDataModel {
 
-    //Declare your model variables here
-    
+    var city : String = ""
+    var temperature : Int = 0
+    var conditions : Int = 0
+    var description : String = ""
+    var pressure : Int = 0
+    var wheaterIcon : String = ""
     
     //This method turns a condition code into the name of the weather condition image
     
