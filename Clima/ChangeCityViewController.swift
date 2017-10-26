@@ -9,7 +9,7 @@
 import UIKit
 
 
-//Write the protocol declaration here:
+//****Protocol****
 protocol ChangeCityDelegate {
     func userEnteredNewCityName(city: String)
 }
@@ -32,8 +32,6 @@ class ChangeCityViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
         
     }
-    
-    
 
     //This is the IBAction that gets called when the user taps the back button. It dismisses the ChangeCityViewController.
     @IBAction func backButtonPressed(_ sender: AnyObject) {

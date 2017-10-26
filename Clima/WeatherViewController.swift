@@ -79,7 +79,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     /***************************************************************/
     func updateUIWithWeatherData() {
         cityLabel.text = weatherDataModel.city
-        temperatureLabel.text = String(weatherDataModel.temperature)
+        temperatureLabel.text = "\(weatherDataModel.temperature)°"
         weatherIcon.image = UIImage(named: weatherDataModel.weaterIconName)
         conditionsDescriptionLabel.text = weatherDataModel.description
     }
@@ -117,7 +117,10 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     //MARK: - Change City Delegate methods
     /***************************************************************/
     func userEnteredNewCityName(city: String) {
-        print(city)
+        
+        let params : [String : String] = ["q": city, "appid": APP_ID]
+        getWeatherData(url: WEATHER_URL, parameters: params)
+        updateUIWithWeatherData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
